@@ -89,6 +89,7 @@ app.put('/api/todos/:id', function update(req, res) {
    * with the newly updated todo.
    */
   var todoId = parseInt(req.params.id);
+  todos.append(todoId);
   res.json({todos: todoId});
 
 });
@@ -98,6 +99,12 @@ app.delete('/api/todos/:id', function destroy(req, res) {
    * id specified in the route parameter (:id) and respond
    * with success.
    */
+   var todoId = req.params.id;
+   target = todos.filter(todoId);
+   if (target === todoId) {
+    todos.splice(todoId, 1);
+    res.json({todos: todos});
+  };
 });
 
 /**********
